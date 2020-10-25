@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import udemy.domain.Post;
 import udemy.domain.User;
 import udemy.dto.AuthorDTO;
+import udemy.dto.CommentDTO;
 import udemy.repository.PostRepository;
 import udemy.repository.UserRepository;
 
@@ -39,6 +40,13 @@ public class Instantation implements CommandLineRunner {
 
         Post post1 = new Post(null, sdf.parse("21/10/2020"), "Partiu viagem!", "Vou para São Paulo. Abraços!", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("23/10/2020"), "Bom dia", "Acordei cedo hoje!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/10/2020"), new AuthorDTO(alexa));
+        CommentDTO c2 = new CommentDTO("Aproveite", sdf.parse("22/10/2020"), new AuthorDTO(bruna));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/10/2020"), new AuthorDTO(alexa));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
