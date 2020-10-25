@@ -3,6 +3,7 @@ package udemy.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import udemy.domain.User;
+import udemy.dto.UserDTO;
 import udemy.repository.UserRepository;
 import udemy.services.exception.ObjectNotFoundException;
 
@@ -23,4 +24,13 @@ public class UserService {
         Optional<User> user = repo.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado."));
     }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+    }
+
 }
